@@ -1,0 +1,14 @@
+#product_table, #product_form, #update_product, .title {
+    margin: 25px;
+    width: 70%;
+}
+
+.table-headers {
+  border: 3px solid black;
+  text-align: center;
+}
+
+/* #product_table {
+    border: 3px solid black;
+    text-align: center;
+} */
