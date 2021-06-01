@@ -3,7 +3,13 @@
     width: 65%;
 }
 
-#payment_form, .paymentMethods_td, {
+#payment_form, .paymentMethods_td {
   border: 3px solid black;
-  text-align: center;
+  buffer: 10px;
+  padding: 15px;
+}
+
+#payment_table {
+    border: 3px solid black;
+    text-align: center;
 }
