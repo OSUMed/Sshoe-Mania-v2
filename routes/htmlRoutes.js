@@ -104,7 +104,7 @@ router.get("/orders", (req, res) => {
   }).then(val => {
     customers = val;
     new Promise((resolve, reject) => {
-      let sqlQuery = "SELECT payment_method_id, credit_card_name FROM Payment_Methods ORDER BY payment_method_id ASC";
+      let sqlQuery = "SELECT payment_method_id, credit_card_name FROM Payment_Methods";
       mysql.pool.query(sqlQuery, (err, result) => {
         if (err) {
           console.log(err);
@@ -126,7 +126,7 @@ router.get("/orders", (req, res) => {
       }).then(val => {
         products = val;
         new Promise((resolve, reject) => {
-          let sqlQuery = "SELECT order_id, order_date FROM Orders ORDER BY order_id ASC";
+          let sqlQuery = "SELECT order_id, order_date, c.customer_name FROM Orders o INNER JOIN Customers c ON o.customer_id = c.customer_id ORDER BY order_id ASC";
           mysql.pool.query(sqlQuery, (err, result) => {
             if (err) {
               console.log(err);
@@ -137,7 +137,8 @@ router.get("/orders", (req, res) => {
         }).then(val => {
           orders = val;
           new Promise((resolve, reject) => {
-            let sqlQuery = "SELECT o.order_id, op.order_product_id, c.customer_name, p.product_name, o.order_date, pm.payment_type, o.price_total FROM Orders o JOIN Orders_Products op ON o.order_id = op.order_id JOIN Products p ON op.product_id = p.product_id INNER JOIN Customers c ON o.customer_id = c.customer_id INNER JOIN Payment_Methods pm ON o.payment_method_id = pm.payment_method_id ORDER BY o.order_id ASC";
+
+            let sqlQuery = "(SELECT o.order_id, op.order_product_id, c.customer_name, p.product_name, o.order_date, pm.payment_type, o.price_total FROM Orders o JOIN Orders_Products op ON o.order_id = op.order_id JOIN Products p ON op.product_id = p.product_id INNER JOIN Customers c ON o.customer_id = c.customer_id LEFT JOIN Payment_Methods pm ON o.payment_method_id = pm.payment_method_id ORDER BY o.order_id ASC)";
             mysql.pool.query(sqlQuery, (err, result) => {
               if (err) {
                 console.log(err);
@@ -156,7 +157,7 @@ router.get("/orders", (req, res) => {
               ordersTable
             }
             //getOrdersTable(data)
-            console.log(data)
+            console.log("Order page stuff: ", ordersTable)
             res.render("orders", data);
           })
         })

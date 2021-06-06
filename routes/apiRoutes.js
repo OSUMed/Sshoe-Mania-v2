@@ -26,17 +26,28 @@ router.post("/customer", (req, res) => {
 
 // Allows users to post a new order to the database.
 router.post("/order", (req, res) => {
-
-    let userInput = extractObjValues(req.body);
-    console.log(userInput);
+  let userInput = extractObjValues(req.body);
+  console.log(userInput);
+  if (userInput[3] === "NULL") {
+    let sqlQuery = "INSERT INTO Orders (order_date, price_total, customer_id) VALUES (?, ?, ?)";
+    mysql.pool.query(sqlQuery, userInput, (err, result) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      res.sendStatus(200);
+    });
+  }
+  else {
     let sqlQuery = "INSERT INTO Orders (order_date, price_total, customer_id, payment_method_id) VALUES (?, ?, ?, ?)";
     mysql.pool.query(sqlQuery, userInput, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        res.sendStatus(200);
+      if (err) {
+        console.log(err);
+        return;
+      }
+      res.sendStatus(200);
     });
+  }
 });
 
 // Allows users to post a new entry into orders_products table.
