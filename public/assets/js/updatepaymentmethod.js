@@ -14,11 +14,11 @@
 
 function updatepaymentMethod1(id){
   $.ajax({
-    url: '/api/paymentMethods/' + id,
+    url: 'https://sshoemania.herokuapp.com/api/paymentMethods/' + id,
     type: 'PUT',
     data: $('#update_payment').serialize(),
     success: function(result){
-      window.location.replace("/paymentMethods");
+      window.location.replace("https://sshoemania.herokuapp.com/paymentMethods");
     },
     error: function(){
       alert('Failed to update payment.');

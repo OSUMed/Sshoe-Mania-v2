@@ -20,7 +20,7 @@ payment_form.addEventListener("submit", e => {
         ccExpDate
     }
 
-    fetch("/api/paymentMethod", {
+    fetch("https://sshoemania.herokuapp.com/api/paymentMethod", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

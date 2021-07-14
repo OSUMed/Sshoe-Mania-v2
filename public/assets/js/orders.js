@@ -23,7 +23,7 @@ order_form.addEventListener("submit", event => {
         payment: selected_payment
     }
 
-    fetch("/api/order", {
+    fetch("https://sshoemania.herokuapp.com/api/order", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -48,7 +48,7 @@ product_form.addEventListener("submit", event => {
         selected_product
     }
 
-    fetch("/api/orders_products", {
+    fetch("https://sshoemania.herokuapp.com/api/orders_products", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
