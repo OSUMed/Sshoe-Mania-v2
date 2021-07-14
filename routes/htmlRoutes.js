@@ -53,7 +53,7 @@ function getOrdersTable(data) {
 }
 
 
-router.get("/", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/", (req, res) => {
   if (JSON.stringify(req.query) === '{}') {
     let sqlQuery = "SELECT * FROM Customers ORDER BY customer_id ASC";
     mysql.pool.query(sqlQuery, (err, result) => {
@@ -85,7 +85,7 @@ router.get("/", (req, res) => {
 })
 
 //Get the Orders table data through several calls and then send it to handlebars
-router.get("/orders", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/orders", (req, res) => {
   let customers;
   let payments;
   let products;
@@ -169,7 +169,7 @@ router.get("/orders", (req, res) => {
 })
 
 //Get the Payment Methods table data through several calls and then send it to handlebars
-router.get("/paymentMethods", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/paymentMethods", (req, res) => {
   let sqlQuery = "SELECT * FROM Payment_Methods ORDER BY payment_method_id ASC";
   mysql.pool.query(sqlQuery, (err, result) => {
     if (err) {
@@ -186,7 +186,7 @@ router.get("/paymentMethods", (req, res) => {
 })
 
 //Get the Products table data through several calls and then send it to handlebars
-router.get("/products", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/products", (req, res) => {
   let sqlQuery = "SELECT * FROM Products ORDER BY product_id ASC";
   mysql.pool.query(sqlQuery, (err, result) => {
     if (err) {
@@ -211,7 +211,7 @@ router.get("/products", (req, res) => {
 // University:
 // https://canvas.oregonstate.edu/courses/1810923/pages/week-8-learn-using-javascript-and-nodejs?module_item_id=20621587
 
-router.get("/paymentMethods/:id", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => {
   let inserts = req.params.id;
   let sqlQuery = "SELECT * FROM Payment_Methods WHERE payment_method_id = ?";
   mysql.pool.query(sqlQuery, [inserts], (err, result) => {
@@ -227,7 +227,7 @@ router.get("/paymentMethods/:id", (req, res) => {
   })
 });
 
-router.get("/customers/:id", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/customers/:id", (req, res) => {
   let customerId = req.params.id;
   let sqlQuery = "SELECT * FROM Customers WHERE customer_id = ?";
   mysql.pool.query(sqlQuery, [customerId], (err, result) => {
@@ -241,7 +241,7 @@ router.get("/customers/:id", (req, res) => {
   })
 });
 
-router.get("/products/:id", (req, res) => {
+router.get("https://sshoemania.herokuapp.com/products/:id", (req, res) => {
   let customerId = req.params.id;
   let sqlQuery = "SELECT * FROM Products WHERE product_id = ?";
   mysql.pool.query(sqlQuery, [customerId], (err, result) => {
