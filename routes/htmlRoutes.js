@@ -65,7 +65,7 @@ router.get("https://sshoemania.herokuapp.com/", (req, res) => {
           customer: result,
 
         }
-        res.render("index", data);
+        res.render("https://sshoemania.herokuapp.com/index", data);
       }
     })
   }
@@ -158,7 +158,7 @@ router.get("https://sshoemania.herokuapp.com/orders", (req, res) => {
             }
             //getOrdersTable(data)
             console.log("Order page stuff: ", ordersTable)
-            res.render("orders", data);
+            res.render("https://sshoemania.herokuapp.com/orders", data);
           })
         })
       })
@@ -179,7 +179,7 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods", (req, res) => {
       let data = {
         paymentMethod: result
       }
-      res.render("payment_methods", data);
+      res.render("https://sshoemania.herokuapp.com/payment_methods", data);
     }
 
   })
@@ -196,7 +196,7 @@ router.get("https://sshoemania.herokuapp.com/products", (req, res) => {
       let data = {
         product: result
       }
-      res.render("products", data);
+      res.render("https://sshoemania.herokuapp.com/products", data);
     }
 
   })
@@ -222,7 +222,7 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => 
       // We return just the first index value because we only want the first record data:
       let paymentMethod = result[0]
       console.log("result here: ", result)
-      res.render("updatepaymentmethod", paymentMethod)
+      res.render("https://sshoemania.herokuapp.com/updatepaymentmethod", paymentMethod)
     }
   })
 });
@@ -236,7 +236,7 @@ router.get("https://sshoemania.herokuapp.com/customers/:id", (req, res) => {
     }
     else {
       let customer = result[0]
-      res.render("updatecustomer", customer)
+      res.render("https://sshoemania.herokuapp.com/updatecustomer", customer)
     }
   })
 });
@@ -250,7 +250,7 @@ router.get("https://sshoemania.herokuapp.com/products/:id", (req, res) => {
     }
     else {
       let product = result[0]
-      res.render("updateproduct", product)
+      res.render("https://sshoemania.herokuapp.com/updateproduct", product)
     }
   })
 });

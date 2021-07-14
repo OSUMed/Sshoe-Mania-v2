@@ -105,7 +105,7 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => 
             let data = {
                 paymentMethod: result[0]
             }
-            res.render("/updatepaymendmethod", data)
+            res.render("https://sshoemania.herokuapp.com//updatepaymendmethod", data)
         }
     })
 });
