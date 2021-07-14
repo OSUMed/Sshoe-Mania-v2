@@ -14,7 +14,7 @@ const db = mysql.createPool({
     database: "heroku_0982de18366080c"
 })
 
-module.exports.pool = pool;
+module.exports.pool = db;
 
 
 // mysql://b4a7f6d20a82ee:83d718e6@us-cdbr-east-04.cleardb.com/heroku_0982de18366080c?reconnect=true
