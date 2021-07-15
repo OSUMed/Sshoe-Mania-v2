@@ -71,8 +71,8 @@ router.get("/", (req, res) => {
   }
   else {
     console.log(req.query.customer)
-    let sqlQuery = "SELECT * FROM Customers WHERE customer_name = ?";
-    mysql.pool.query(sqlQuery, [req.query.customer], (err, result) => {
+    let sqlQuery = "SELECT * FROM Customers WHERE customer_name REGEXP ?";
+    mysql.pool.query(sqlQuery, ['^' + req.query.customer], (err, result) => {
       if (err) {
         console.log(err);
       }
