@@ -18,7 +18,7 @@ product_form1.addEventListener("submit", e => {
         amount
     }
 
-    fetch("https://sshoemania.herokuapp.com/api/product", {
+    fetch("/api/product", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

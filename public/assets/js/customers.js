@@ -17,7 +17,7 @@ customer_form.addEventListener("submit", e => {
         phone
     }
 
-    fetch("https://sshoemania.herokuapp.com/api/customer", {
+    fetch("/api/customer", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -26,13 +26,13 @@ customer_form.addEventListener("submit", e => {
     }).then(response => {
         console.log(response);
         customer_form.reset();
-        window.location.reload("https://sshoemania.herokuapp.com/products");
+        window.location.reload("/products");
     })
 })
 
 search_button.addEventListener("click", event => {
     let searchValue = search_input.value;
-    fetch("https://sshoemania.herokuapp.com/?" + new URLSearchParams({ customer: searchValue })).then(res => res.json().then(data => {
+    fetch("/?" + new URLSearchParams({ customer: searchValue })).then(res => res.json().then(data => {
         // Once I get the data back from the server, I will clear the table
         // and then populate it with the customer the user was searching for.
         console.log(data)
@@ -68,7 +68,7 @@ search_button.addEventListener("click", event => {
             let td5 = document.createElement("td");
             td4.setAttribute("class", "table-data makeButton");
             let aTag = document.createElement("a")
-            aTag.setAttribute("href", `https://sshoemania.herokuapp.com/customers/${currentCustomer.customer_id}`);
+            aTag.setAttribute("href", `/customers/${currentCustomer.customer_id}`);
             let updateBtn = document.createElement("button")
             updateBtn.setAttribute("class", "btn btn-primary");
             updateBtn.setAttribute("type", "button");
@@ -77,7 +77,7 @@ search_button.addEventListener("click", event => {
             aTag.appendChild(updateBtn);
             td5.appendChild(aTag);
 
-
+            
             tr.appendChild(td1);
             tr.appendChild(td2);
             tr.appendChild(td3);
@@ -88,8 +88,8 @@ search_button.addEventListener("click", event => {
 
             console.log(data[i])
         }
-
-
+        
+        
 
     }))
 

@@ -12,7 +12,7 @@
 
 function deleteproduct(id){
   $.ajax({
-    url: 'https://sshoemania.herokuapp.com/api/products/' + id,
+    url: '/api/products/' + id,
     type: 'DELETE',
     success: function(result){
       window.location.reload(true);

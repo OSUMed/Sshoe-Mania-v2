@@ -11,7 +11,7 @@ function extractObjValues(obj) {
 }
 
 // Allows users to post a new customer to the database.
-router.post("https://sshoemania.herokuapp.com/customer", (req, res) => {
+router.post("/customer", (req, res) => {
 
     let userInput = extractObjValues(req.body);
     let sqlQuery = "INSERT INTO Customers (customer_name, customer_email, customer_phone) VALUES (?, ?, ?)";
@@ -25,7 +25,7 @@ router.post("https://sshoemania.herokuapp.com/customer", (req, res) => {
 });
 
 // Allows users to post a new order to the database.
-router.post("https://sshoemania.herokuapp.com/order", (req, res) => {
+router.post("/order", (req, res) => {
   let userInput = extractObjValues(req.body);
   console.log(userInput);
   if (userInput[3] === "NULL") {
@@ -51,7 +51,7 @@ router.post("https://sshoemania.herokuapp.com/order", (req, res) => {
 });
 
 // Allows users to post a new entry into orders_products table.
-router.post("https://sshoemania.herokuapp.com/orders_products", (req, res) => {
+router.post("/orders_products", (req, res) => {
 
     let userInput = extractObjValues(req.body);
     console.log(userInput)
@@ -67,7 +67,7 @@ router.post("https://sshoemania.herokuapp.com/orders_products", (req, res) => {
 
 
 
-router.post("https://sshoemania.herokuapp.com/product", (req, res) => {
+router.post("/product", (req, res) => {
 
     let userInput = extractObjValues(req.body);
     let sqlQuery = "INSERT INTO Products (product_name, product_price, product_information, stock_amount) VALUES (?, ?, ?, ?)";
@@ -80,7 +80,7 @@ router.post("https://sshoemania.herokuapp.com/product", (req, res) => {
     });
 });
 
-router.post("https://sshoemania.herokuapp.com/paymentMethod", (req, res) => {
+router.post("/paymentMethod", (req, res) => {
     let userInput = extractObjValues(req.body);
   var sqlQuery = "INSERT INTO Payment_Methods (payment_type, credit_card_name, credit_card_number, credit_card_exp_date) VALUES (?, ?, ?, ?)";
   // var inserts = [req.body.payment_type, req.body.Credit_card_name, req.body.Credit_card_number, req.body.Credit_card_exp_date];
@@ -94,7 +94,7 @@ router.post("https://sshoemania.herokuapp.com/paymentMethod", (req, res) => {
 });
 
 
-router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => {
+router.get("/paymentMethods/:id", (req, res) => {
     let sqlQuery = "SELECT * FROM Payment_Methods WHERE payment_method_id = ?";
     let insert = [req.params.payment_method_id]
     mysql.pool.query(sqlQuery, insert, (err, result) => {
@@ -105,7 +105,7 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => 
             let data = {
                 paymentMethod: result[0]
             }
-            res.render("https://sshoemania.herokuapp.com//updatepaymendmethod", data)
+            res.render("/updatepaymendmethod", data)
         }
     })
 });
@@ -130,7 +130,7 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => 
 
 
 // Here we put the table data from our update-payment method table into our databse:
-router.put("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => {
+router.put("/paymentMethods/:id", (req, res) => {
     let sqlQuery = "UPDATE Payment_Methods SET payment_type = ?, credit_card_name = ?, credit_card_number = ?, credit_card_exp_date = ? WHERE payment_method_id = ?";
     let insert = [req.body.payment_type, req.body.credit_card_name, req.body.credit_card_number, req.body.credit_card_exp_date, req.params.id];
 
@@ -146,7 +146,7 @@ router.put("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => 
 
 
 // Here we put the table data from our update-customer table into our databse:
-router.put("https://sshoemania.herokuapp.com/customers/:id", (req, res) => {
+router.put("/customers/:id", (req, res) => {
 
     let sqlQuery = "UPDATE Customers SET customer_name = ?, customer_email = ?, customer_phone = ? WHERE customer_id = ?";
     let insert = [req.body.customer_name, req.body.customer_email, req.body.customer_phone, req.params.id];
@@ -161,7 +161,7 @@ router.put("https://sshoemania.herokuapp.com/customers/:id", (req, res) => {
 });
 
 // Here we put the table data from our update-product table into our databse:
-router.put("https://sshoemania.herokuapp.com/products/:id", (req, res) => {
+router.put("/products/:id", (req, res) => {
 
     let sqlQuery = "UPDATE Products SET product_name = ?, product_price = ?, product_information = ?, stock_amount = ? WHERE product_id = ?";
     let insert = [req.body.product_name, req.body.product_price, req.body.product_information, req.body.stock_amount, req.params.id];
@@ -185,7 +185,7 @@ router.put("https://sshoemania.herokuapp.com/products/:id", (req, res) => {
 
 
 // Here we delete the record from our order table:
-router.delete("https://sshoemania.herokuapp.com/orders/:order_product_id", (req, res) => {
+router.delete("/orders/:order_product_id", (req, res) => {
   let inserts = [req.params.order_product_id];
   let sqlQuery = "DELETE FROM Orders_Products WHERE order_product_id= ?"
   mysql.pool.query(sqlQuery, inserts, (err, result) => {
@@ -198,7 +198,7 @@ router.delete("https://sshoemania.herokuapp.com/orders/:order_product_id", (req,
 });
 
 // Here we delete the record from our payment method table:
-router.delete("https://sshoemania.herokuapp.com/paymentMethods/:payment_method_id", (req, res) => {
+router.delete("/paymentMethods/:payment_method_id", (req, res) => {
   let inserts = req.params.payment_method_id;
   let sqlQuery = "DELETE FROM Payment_Methods WHERE payment_method_id = ?"
   mysql.pool.query(sqlQuery, [inserts], (err, result) => {
@@ -211,7 +211,7 @@ router.delete("https://sshoemania.herokuapp.com/paymentMethods/:payment_method_i
 });
 
 // Here we delete the record from our customer table:
-router.delete("https://sshoemania.herokuapp.com/:customer_id", (req, res) => {
+router.delete("/:customer_id", (req, res) => {
   let inserts = req.params.customer_id;
   let sqlQuery = "DELETE FROM Customers WHERE customer_id = ?"
   mysql.pool.query(sqlQuery, [inserts], (err, result) => {
@@ -224,7 +224,7 @@ router.delete("https://sshoemania.herokuapp.com/:customer_id", (req, res) => {
 });
 
 // Here we delete the record from our product table:
-router.delete("https://sshoemania.herokuapp.com/products/:product_id", (req, res) => {
+router.delete("/products/:product_id", (req, res) => {
   let inserts = req.params.product_id;
   let sqlQuery = "DELETE FROM Products WHERE product_id = ?"
   mysql.pool.query(sqlQuery, [inserts], (err, result) => {

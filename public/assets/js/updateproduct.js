@@ -15,11 +15,11 @@
 function updateProduct(id){
     console.log("deletepaymentMethod I am running"+id)
     $.ajax({
-      url: 'https://sshoemania.herokuapp.com/api/products/' + id,
+      url: '/api/products/' + id,
       type: 'PUT',
       data: $('#update_product').serialize(),
       success: function(result){
-        window.location.replace("https://sshoemania.herokuapp.com/products");
+        window.location.replace("/products");
       }
     })
   };

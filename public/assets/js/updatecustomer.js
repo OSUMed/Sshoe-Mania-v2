@@ -1,7 +1,7 @@
 // Code styled from lecture: Created AJAX function to accomplish update
 // functionality. Basically the href makes a call to this function with the
 // id parameter. It does a PUT method and then grabs the data by the id of the
-// form. It uses the .serialize() method which makes the form into a query
+// form. It uses the .serialize() method which makes the form into a query 
 // string and is sent to a server in a Ajax request: https://api.jquery.com/serialize/
 // After we use the window.location object's method replace to return back to
 // the page where we first clicked the update href:
@@ -14,12 +14,12 @@
 
 function updateCustomer(id){
   $.ajax({
-    url: 'https://sshoemania.herokuapp.com/api/customers/' + id,
+    url: '/api/customers/' + id,
     type: 'PUT',
     data: $('#update_customer').serialize(),
     success: function(result){
       console.log(result);
-      window.location.replace("https://sshoemania.herokuapp.com/");
+      window.location.replace("/");
     }
   })
 };

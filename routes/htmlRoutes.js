@@ -53,7 +53,7 @@ function getOrdersTable(data) {
 }
 
 
-router.get("https://sshoemania.herokuapp.com/", (req, res) => {
+router.get("/", (req, res) => {
   if (JSON.stringify(req.query) === '{}') {
     let sqlQuery = "SELECT * FROM Customers ORDER BY customer_id ASC";
     mysql.pool.query(sqlQuery, (err, result) => {
@@ -65,7 +65,7 @@ router.get("https://sshoemania.herokuapp.com/", (req, res) => {
           customer: result,
 
         }
-        res.render("https://sshoemania.herokuapp.com/index", data);
+        res.render("index", data);
       }
     })
   }
@@ -85,7 +85,7 @@ router.get("https://sshoemania.herokuapp.com/", (req, res) => {
 })
 
 //Get the Orders table data through several calls and then send it to handlebars
-router.get("https://sshoemania.herokuapp.com/orders", (req, res) => {
+router.get("/orders", (req, res) => {
   let customers;
   let payments;
   let products;
@@ -158,7 +158,7 @@ router.get("https://sshoemania.herokuapp.com/orders", (req, res) => {
             }
             //getOrdersTable(data)
             console.log("Order page stuff: ", ordersTable)
-            res.render("https://sshoemania.herokuapp.com/orders", data);
+            res.render("orders", data);
           })
         })
       })
@@ -169,7 +169,7 @@ router.get("https://sshoemania.herokuapp.com/orders", (req, res) => {
 })
 
 //Get the Payment Methods table data through several calls and then send it to handlebars
-router.get("https://sshoemania.herokuapp.com/paymentMethods", (req, res) => {
+router.get("/paymentMethods", (req, res) => {
   let sqlQuery = "SELECT * FROM Payment_Methods ORDER BY payment_method_id ASC";
   mysql.pool.query(sqlQuery, (err, result) => {
     if (err) {
@@ -179,14 +179,14 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods", (req, res) => {
       let data = {
         paymentMethod: result
       }
-      res.render("https://sshoemania.herokuapp.com/payment_methods", data);
+      res.render("payment_methods", data);
     }
 
   })
 })
 
 //Get the Products table data through several calls and then send it to handlebars
-router.get("https://sshoemania.herokuapp.com/products", (req, res) => {
+router.get("/products", (req, res) => {
   let sqlQuery = "SELECT * FROM Products ORDER BY product_id ASC";
   mysql.pool.query(sqlQuery, (err, result) => {
     if (err) {
@@ -196,7 +196,7 @@ router.get("https://sshoemania.herokuapp.com/products", (req, res) => {
       let data = {
         product: result
       }
-      res.render("https://sshoemania.herokuapp.com/products", data);
+      res.render("products", data);
     }
 
   })
@@ -211,7 +211,7 @@ router.get("https://sshoemania.herokuapp.com/products", (req, res) => {
 // University:
 // https://canvas.oregonstate.edu/courses/1810923/pages/week-8-learn-using-javascript-and-nodejs?module_item_id=20621587
 
-router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => {
+router.get("/paymentMethods/:id", (req, res) => {
   let inserts = req.params.id;
   let sqlQuery = "SELECT * FROM Payment_Methods WHERE payment_method_id = ?";
   mysql.pool.query(sqlQuery, [inserts], (err, result) => {
@@ -222,12 +222,12 @@ router.get("https://sshoemania.herokuapp.com/paymentMethods/:id", (req, res) => 
       // We return just the first index value because we only want the first record data:
       let paymentMethod = result[0]
       console.log("result here: ", result)
-      res.render("https://sshoemania.herokuapp.com/updatepaymentmethod", paymentMethod)
+      res.render("updatepaymentmethod", paymentMethod)
     }
   })
 });
 
-router.get("https://sshoemania.herokuapp.com/customers/:id", (req, res) => {
+router.get("/customers/:id", (req, res) => {
   let customerId = req.params.id;
   let sqlQuery = "SELECT * FROM Customers WHERE customer_id = ?";
   mysql.pool.query(sqlQuery, [customerId], (err, result) => {
@@ -236,12 +236,12 @@ router.get("https://sshoemania.herokuapp.com/customers/:id", (req, res) => {
     }
     else {
       let customer = result[0]
-      res.render("https://sshoemania.herokuapp.com/updatecustomer", customer)
+      res.render("updatecustomer", customer)
     }
   })
 });
 
-router.get("https://sshoemania.herokuapp.com/products/:id", (req, res) => {
+router.get("/products/:id", (req, res) => {
   let customerId = req.params.id;
   let sqlQuery = "SELECT * FROM Products WHERE product_id = ?";
   mysql.pool.query(sqlQuery, [customerId], (err, result) => {
@@ -250,7 +250,7 @@ router.get("https://sshoemania.herokuapp.com/products/:id", (req, res) => {
     }
     else {
       let product = result[0]
-      res.render("https://sshoemania.herokuapp.com/updateproduct", product)
+      res.render("updateproduct", product)
     }
   })
 });
